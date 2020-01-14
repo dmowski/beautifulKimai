@@ -2,6 +2,7 @@
   import credentials from "./store/credentialsStore.js";
   import { onMount } from "svelte";
   import kimaiApi from "./kimaiApi";
+  import converters from "./converters";
   let APIinformationImage = "./loginInformation.png";
   let showInfoPage = false;
 
@@ -12,10 +13,11 @@
 
   async function loginFromForm(event) {
     event.preventDefault();
+    const urlAPIclear = converters.parseKiamaiUrl(urlAPI);
     const isCorrectLogin = await credentials.checkCredentials(
       login,
       token,
-      urlAPI
+      urlAPIclear
     );
     if (!isCorrectLogin) {
       alert("Token or login is not correct");

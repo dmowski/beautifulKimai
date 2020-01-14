@@ -1,4 +1,10 @@
 export default {
+  parseKiamaiUrl(urlString) {
+    const urlObject = new URL(urlString);
+    const APIurl = urlObject.origin + "/api/";
+
+    return APIurl;
+  },
   date: {
     toView(originDateString) {
       return originDateString.split("T")[0];
