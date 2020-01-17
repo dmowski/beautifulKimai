@@ -87,7 +87,7 @@
     display: inline-block;
   }
   .time {
-    width: 40px;
+    width: 60px;
   }
 
   .time + i {
@@ -112,13 +112,15 @@
       <input
         class="time"
         bind:value={reportInEditMode.hours}
-        type="text"
+        min="0"
+        type="number"
         name="duration" />
       <i>h</i>
       <input
         class="time"
+        min="0"
         bind:value={reportInEditMode.minutes}
-        type="text"
+        type="number"
         name="duration" />
       <i>m</i>
     </label>

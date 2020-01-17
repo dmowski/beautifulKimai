@@ -2,6 +2,14 @@ import { writable } from "svelte/store";
 import credentials from "./credentialsStore";
 import kimaiApi from "../kimaiApi";
 
+function checkForError(result, consoleMessage) {
+  if (result.code === 400) {
+    alert("Save error: " + result.message);
+  }
+
+  console.log(consoleMessage, result);
+}
+
 function createReportsStore() {
   const { subscribe, set, update } = writable([]);
   let urlAPI = "";
@@ -27,12 +35,12 @@ function createReportsStore() {
         id,
         reportObject
       );
-      console.log("result of updating", result);
+      checkForError(result, "result of updating");
       return this.getReportList();
     },
     saveNewReport: async function(reportObject) {
       const result = await kimaiApi.createReport(urlAPI, headers, reportObject);
-      console.log("result of saving new", result);
+      checkForError(result, "result of saving new");
       return this.getReportList();
     },
 
@@ -41,7 +49,7 @@ function createReportsStore() {
         return;
       }
       const result = await kimaiApi.deleteReport(urlAPI, headers, id);
-      console.log("result of delete" + id, result);
+      checkForError(result, "result of delete");
       return this.getReportList();
     },
 

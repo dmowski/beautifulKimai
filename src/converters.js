@@ -36,6 +36,8 @@ export default {
       return `${hoursTemplate}${separator}${minutesTemplate}${lastPart}`;
     },
     toSrc(hours, minutes) {
+      hours = hours || 0;
+      minutes = minutes || 0;
       const hoursTime = parseInt(hours, 10) * 60 * 60;
       const minutesTime = parseInt(minutes, 10) * 60;
       return hoursTime + minutesTime;
