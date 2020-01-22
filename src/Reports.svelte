@@ -9,7 +9,7 @@
 
   $: selectedReport = null;
 
-  function selectReport(event) {
+  function userSelectReport(event) {
     const selectedId = event.detail.id;
     selectedReport = $reports.find(report => report.id == selectedId);
   }
@@ -20,7 +20,20 @@
     }, 0);
     return converter.duration.toView(globalDuration);
   }
+  function refreshSelectReport() {
+    const isExistSelectedReport =
+      selectedReport &&
+      $reports.find(report => {
+        return report.id === selectedReport.id;
+      });
 
+    if (!isExistSelectedReport) {
+      selectedReport =
+        $reports.find(report => {
+          return report.id;
+        }) || null;
+    }
+  }
   onMount(async () => {
     const todayDayObj = new Date();
     const todayString = todayDayObj.toISOString().split("T")[0];
@@ -28,13 +41,25 @@
       if (!reports) {
         return;
       }
+
       const listOfDays = [
         ...new Set(
           reports.map(report => {
             return converter.date.toView(report.end);
           })
         )
-      ];
+      ].sort((dayA, dayB) => {
+        var a = new Date(dayA).getTime();
+        var b = new Date(dayB).getTime();
+        if (a > b) {
+          return -1;
+        }
+        if (a < b) {
+          return 1;
+        }
+        return 0;
+      });
+
       daysBlock = listOfDays.map(day => {
         const listOfReports = reports.filter(report => {
           const reportDay = converter.date.toView(report.end);
@@ -48,9 +73,10 @@
           reports: listOfReports
         };
       });
+      refreshSelectReport();
     });
     await reports.getReportList();
-    selectedReport = $reports.find(report => report.id);
+    refreshSelectReport();
   });
 </script>
 
@@ -100,7 +126,7 @@
         <PreviewReport
           {report}
           isSelectedReport={selectedReport && selectedReport.id === report.id}
-          on:select={selectReport} />
+          on:select={userSelectReport} />
       {/each}
     </div>
   {/each}

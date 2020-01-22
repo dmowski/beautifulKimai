@@ -3,11 +3,12 @@ import credentials from "./credentialsStore";
 import kimaiApi from "../kimaiApi";
 
 function checkForError(result, consoleMessage) {
-  if (result.code === 400) {
+  console.log(consoleMessage, result);
+  const isGoodResult = result.code !== 400;
+  if (!isGoodResult) {
     alert("Save error: " + result.message);
   }
-
-  console.log(consoleMessage, result);
+  return isGoodResult;
 }
 
 function createReportsStore() {
@@ -39,6 +40,12 @@ function createReportsStore() {
       return this.getReportList();
     },
     saveNewReport: async function(reportObject) {
+      let newTmpRepors = window.reports.slice();
+      newTmpRepors.push(reportObject);
+      update(() => {
+        return newTmpRepors;
+      });
+
       const result = await kimaiApi.createReport(urlAPI, headers, reportObject);
       checkForError(result, "result of saving new");
       return this.getReportList();
@@ -48,6 +55,15 @@ function createReportsStore() {
       if (!id) {
         return;
       }
+
+      let newTmpRepors = window.reports
+        .slice()
+        .filter(report => report.id !== id);
+
+      update(() => {
+        return newTmpRepors;
+      });
+
       const result = await kimaiApi.deleteReport(urlAPI, headers, id);
       checkForError(result, "result of delete");
       return this.getReportList();

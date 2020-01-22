@@ -56,6 +56,11 @@
 
   let deleteReport = async e => {
     e.preventDefault();
+    const needDelete = confirm("Delete report?");
+    if (!needDelete) {
+      return;
+    }
+
     await reports.deleteReport(reportInEditMode.id);
   };
 

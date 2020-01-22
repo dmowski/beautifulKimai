@@ -7,9 +7,11 @@
   const dispatch = createEventDispatcher();
 
   function selectReport(event) {
-    dispatch("select", {
-      id: report.id
-    });
+    if (report.id) {
+      dispatch("select", {
+        id: report.id
+      });
+    }
   }
 </script>
 
@@ -45,9 +47,9 @@
 <article
   on:click={selectReport}
   class={isSelectedReport ? `article_selected` : ''}>
-  <p class="description">{report.description}</p>
-  <p class="project">{report.project.name}</p>
-  <p class="activity">{report.activity.name}</p>
+  <p class="description">{report.description || ''}</p>
+  <p class="project">{report.project.name || ''}</p>
+  <p class="activity">{report.activity.name || ''}</p>
   <!--p class="date">
     <i>{converter.date.toView(report.end)}</i>
   </p-->
