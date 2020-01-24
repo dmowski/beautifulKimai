@@ -1,5 +1,7 @@
 <script>
   import converter from "./converters";
+  import Datepicker from "svelte-calendar";
+  import dayjs from "dayjs";
 
   import reports from "./store/reportsStore.js";
   import activities from "./store/activitiesStore.js";
@@ -80,6 +82,9 @@
     }
   });
   const reportInEditMode = {};
+  function skip(e) {
+    e.preventDefault();
+  }
 </script>
 
 <style>
@@ -102,11 +107,6 @@
     width: 70%;
   }
 
-  button {
-    xdisplay: block;
-  }
-  .buttons {
-  }
   .button-cancel {
     float: right;
   }
@@ -138,11 +138,18 @@
         name="duration" />
       <i>m</i>
     </label>
-    <label>
+
+    <div>
       <span>Date:</span>
       <br />
-      <input bind:value={reportInEditMode.date} type="date" name="date" />
-    </label>
+      <input bind:value={reportInEditMode.date} type="text" name="date" />
+      <Datepicker
+        bind:formattedSelected={reportInEditMode.date}
+        format={date => dayjs(date).format('YYYY-MM-DD')}>
+        <button on:click={skip}>📆</button>
+      </Datepicker>
+    </div>
+
     <label>
       <span>Customer:</span>
       <br />

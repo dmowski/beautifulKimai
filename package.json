@@ -22,9 +22,11 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
+    "dayjs": "^1.8.19",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "morgan": "^1.9.1",
-    "sirv-cli": "^0.4.4"
+    "sirv-cli": "^0.4.4",
+    "svelte-calendar": "^1.3.1"
   }
 }
