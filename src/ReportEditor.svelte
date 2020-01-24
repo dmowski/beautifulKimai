@@ -183,7 +183,7 @@
         {/each}
       </select>
     </label>
-    <hr />
+    <br />
     <div class="buttons">
       <button on:click={saveThisReport} class="button-color">Update</button>
       <button on:click={saveAsNew} class="button-color">New</button>
