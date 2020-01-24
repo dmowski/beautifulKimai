@@ -101,6 +101,15 @@
   select {
     width: 70%;
   }
+
+  button {
+    xdisplay: block;
+  }
+  .buttons {
+  }
+  .button-cancel {
+    float: right;
+  }
 </style>
 
 <div>
@@ -168,10 +177,15 @@
       </select>
     </label>
     <hr />
-
-    <button on:click={saveThisReport} class="button-color">Update</button>
-    <button on:click={saveAsNew} class="button-color">New</button>
-    <button on:click={saveAsToday} class="button-color">Save for today</button>
-    <button on:click={deleteReport} class="button-cancel">Delete</button>
+    <div class="buttons">
+      <button on:click={saveThisReport} class="button-color">Update</button>
+      <button on:click={saveAsNew} class="button-color">New</button>
+      <button on:click={saveAsToday} class="button-color">
+        Save for today
+      </button>
+      <button on:click={deleteReport} class="button-cancel">
+        Delete report
+      </button>
+    </div>
   </form>
 </div>

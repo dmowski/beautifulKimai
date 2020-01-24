@@ -62,12 +62,8 @@
   }
 
   input {
-    background: #f2f2f2;
     width: 300px;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
+    margin: 0 0 10px;
     font-size: 14px;
   }
   img {
@@ -81,7 +77,6 @@
     width: 100%;
     max-width: 300px;
     border: 0;
-    padding: 15px;
     margin: 0;
     color: #ffffff;
     transition: all 0.3 ease;
