@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export default {
   parseKiamaiUrl(urlString) {
     const urlObject = new URL(urlString);
@@ -8,7 +10,9 @@ export default {
   date: {
     toView(originDateString) {
       originDateString = originDateString || '';
-      return originDateString.split("T")[0];
+      const day = dayjs(originDateString || Date());
+
+      return day.format('YYYY-MM-DD');
     },
     toSrc(userViewString) {
       const date = new Date(userViewString);

@@ -45,7 +45,7 @@
       const listOfDays = [
         ...new Set(
           reports.map(report => {
-            return converter.date.toView(report.end);
+            return converter.date.toView(report.begin);
           })
         )
       ].sort((dayA, dayB) => {
@@ -62,7 +62,7 @@
 
       daysBlock = listOfDays.map(day => {
         const listOfReports = reports.filter(report => {
-          const reportDay = converter.date.toView(report.end);
+          const reportDay = converter.date.toView(report.begin);
           return reportDay === day;
         });
 
