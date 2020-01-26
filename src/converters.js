@@ -7,6 +7,7 @@ export default {
   },
   date: {
     toView(originDateString) {
+      originDateString = originDateString || '';
       return originDateString.split("T")[0];
     },
     toSrc(userViewString) {
