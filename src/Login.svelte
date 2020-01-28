@@ -72,27 +72,15 @@
     margin: 45px 0 55px 0;
   }
   button {
-    text-transform: uppercase;
-    background: #4caf50;
     width: 100%;
     max-width: 300px;
-    border: 0;
-    margin: 0;
-    color: #ffffff;
-    transition: all 0.3 ease;
-  }
-
-  button:hover,
-  button:active,
-  button:focus {
-    background: #43a047;
   }
 
   .get-info-link {
     margin: 15px 0 0;
     color: #b3b3b3;
     font-size: 12px;
-    color: #4caf50;
+    color: #2582e7;
     text-decoration: none;
     cursor: pointer;
   }
@@ -137,7 +125,9 @@
           type="password"
           required />
       </label>
-      <button type="submit">Login</button>
+      <button type="submit" class="button-color button-color-fill">
+        Login
+      </button>
       <p class="get-info-link" on:click={switchInfo}>
         How to generate API password?
       </p>
