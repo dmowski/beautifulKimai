@@ -32,22 +32,29 @@ label {
   display: block;
 }
 
+.input-field,
 input,
 button,
 select,
 textarea {
+  background-color: #fff;
   font-family: inherit;
   font-size: inherit;
-  padding: 0.4em;
+  line-height: 20px;
+  padding: 7px 10px 8px 10px;
+  font-size: 14px;
   margin: 0 0 0.5em 0;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 2px;
+  border: 2px solid rgba(55, 56, 60, 0.16);
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
+
+.input-field:focus,
 select:focus,
 input:focus,
 textarea:focus {
-  border-color: #409eff;
+  border-color: #2582e7;
   outline: none;
 }
 input:disabled {
@@ -64,39 +71,63 @@ button {
   padding-left: 10px;
   padding-right: 10px;
   cursor: pointer;
+  outline: none;
+  border: 2px solid #333;
 }
 
 button:disabled {
   color: #999;
 }
 
-button:not(:disabled):active {
-  background-color: #ddd;
-}
-
-button:focus {
-  border-color: #666;
+button:focus,
+button:hover,
+button:active {
+  xborder-color: #2582e7;
 }
 
 .button-color {
-  text-transform: uppercase;
-  background: #4caf50;
-  border-color: #4caf50;
-  color: #ffffff;
-  font-weight: 500;
-  transition: all 0.3 ease;
-}
+  background-color: rgba(126, 145, 159, 0.08);
+  background-color: rgba(37, 130, 231, 0);
 
+  color: #2582e7;
+  padding: 6px 20px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
 .button-color:hover,
 .button-color:active,
 .button-color:focus {
-  background: #43a047;
+  background-color: rgba(37, 130, 231, 0.16);
 }
 
-.button-cancel {
+.button-color-fill {
+  box-shadow: 0 2px 4px 0 rgba(34, 41, 67, 0.14);
+  background-color: #2582e7;
+  color: #fff;
+}
+
+.button-color-fill:hover,
+.button-color-fill:active,
+.button-color-fill:focus {
+  xborder-color: #175aa1;
+  background-color: #2376cf;
+  color: #fff;
+}
+
+.button-color-fail {
   background-color: transparent;
-  border: none;
-  color: tomato;
-  font-weight: 500;
-  text-transform: uppercase;
+  color: rgba(255, 99, 71);
+  border-color: transparent;
+}
+.button-color-fail:hover,
+.button-color-fail:active,
+.button-color-fail:focus {
+  xborder-color: rgba(255, 99, 71, 1);
+  xborder-color: rgba(255, 99, 71, 0.08);
+  background-color: rgba(255, 99, 71, 0.09);
 }

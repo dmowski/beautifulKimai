@@ -106,18 +106,31 @@
     display: inline-block;
   }
   .time {
-    width: 60px;
+    width: 70px;
   }
 
   .time + i {
     padding-right: 10px;
   }
   select {
-    width: 70%;
+    width: 100%;
   }
 
-  .button-cancel {
+  .button-color-fail {
     float: right;
+  }
+  .row {
+    display: block;
+    display: flex;
+  }
+  .row-category {
+    justify-content: space-between;
+  }
+  .row label {
+    width: calc(33.333% - 15px);
+  }
+  .date-picker {
+    padding-right: 15px;
   }
 </style>
 
@@ -128,80 +141,88 @@
       <br />
       <textarea bind:value={reportInEditMode.description} name="description" />
     </label>
+    <br />
+    <div class="row">
+      <div class="date-picker">
+        <span>Date:</span>
+        <br />
+        <Datepicker
+          {daysOfWeek}
+          selected={new Date(reportInEditMode.date)}
+          bind:formattedSelected={reportInEditMode.date}
+          format={date => dayjs(date).format('YYYY-MM-DD')}
+          style="--button-border-color: #ccc;">
+          <button on:click={skip} class="date-picker-button input-field">
+            {reportInEditMode.date}
+          </button>
+        </Datepicker>
+      </div>
+      <div>
+        <span>Time:</span>
+        <br />
+        <input
+          class="time"
+          bind:value={reportInEditMode.hours}
+          min="0"
+          type="number"
+          name="duration" />
+        <i>h</i>
+        <input
+          class="time"
+          min="0"
+          bind:value={reportInEditMode.minutes}
+          type="number"
+          name="duration" />
+        <i>m</i>
+      </div>
 
-    <label>
-      <span>Time:</span>
-      <br />
-      <input
-        class="time"
-        bind:value={reportInEditMode.hours}
-        min="0"
-        type="number"
-        name="duration" />
-      <i>h</i>
-      <input
-        class="time"
-        min="0"
-        bind:value={reportInEditMode.minutes}
-        type="number"
-        name="duration" />
-      <i>m</i>
-    </label>
+    </div>
+    <br />
+    <div class="row row-category">
+      <label>
+        <span>Customer:</span>
+        <br />
+        <select bind:value={reportInEditMode.customerId}>
+          {#each $customers as customer}
+            <option value={customer.id}>{customer.name}</option>
+          {/each}
+        </select>
+      </label>
 
-    <div>
-      <span>Date:</span>
-      <br />
-      <input bind:value={reportInEditMode.date} type="text" name="date" />
-      <Datepicker
-        {daysOfWeek}
-        bind:formattedSelected={reportInEditMode.date}
-        format={date => dayjs(date).format('YYYY-MM-DD')}>
-        <button on:click={skip}>📆</button>
-      </Datepicker>
+      <label>
+        <span>Project:</span>
+        <br />
+        <select bind:value={reportInEditMode.projectId}>
+          {#each $projects as project}
+            {#if project.customer === reportInEditMode.customerId}
+              <option value={project.id}>{project.name}</option>
+            {/if}
+          {/each}
+        </select>
+      </label>
+
+      <label>
+        <span>Activity:</span>
+        <br />
+        <select bind:value={reportInEditMode.activityId}>
+          {#each $activities as activity}
+            {#if !activity.project || activity.project === reportInEditMode.projectId}
+              <option value={activity.id}>{activity.name}</option>
+            {/if}
+          {/each}
+        </select>
+      </label>
+
     </div>
 
-    <label>
-      <span>Customer:</span>
-      <br />
-      <select bind:value={reportInEditMode.customerId}>
-        {#each $customers as customer}
-          <option value={customer.id}>{customer.name}</option>
-        {/each}
-      </select>
-    </label>
-
-    <label>
-      <span>Project:</span>
-      <br />
-      <select bind:value={reportInEditMode.projectId}>
-        {#each $projects as project}
-          {#if project.customer === reportInEditMode.customerId}
-            <option value={project.id}>{project.name}</option>
-          {/if}
-        {/each}
-      </select>
-    </label>
-
-    <label>
-      <span>Activity:</span>
-      <br />
-      <select bind:value={reportInEditMode.activityId}>
-        {#each $activities as activity}
-          {#if !activity.project || activity.project === reportInEditMode.projectId}
-            <option value={activity.id}>{activity.name}</option>
-          {/if}
-        {/each}
-      </select>
-    </label>
     <br />
     <div class="buttons">
-      <button on:click={saveThisReport} class="button-color">Update</button>
-      <button on:click={saveAsNew} class="button-color">New</button>
-      <button on:click={saveAsToday} class="button-color">
-        Save for today
+      <button on:click={saveThisReport} class="button-color button-color-fill">
+        Update
       </button>
-      <button on:click={deleteReport} class="button-cancel">
-        Delete report
+      <button on:click={saveAsNew} class="button-color">Create new</button>
+      <button on:click={deleteReport} class="button-color button-color-fail">
+        Delete
       </button>
     </div>
   </form>

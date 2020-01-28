@@ -89,8 +89,7 @@
 
   .report-editor {
     box-sizing: border-box;
-    padding: 10px;
-    padding-left: 30px;
+    padding: 10px 30px;
     width: 50%;
     position: fixed;
     right: 0;
