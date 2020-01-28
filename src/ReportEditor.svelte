@@ -85,6 +85,15 @@
   function skip(e) {
     e.preventDefault();
   }
+  const daysOfWeek = [
+    ["Monday", "Mon"],
+    ["Tuesday", "Tue"],
+    ["Wednesday", "Wed"],
+    ["Thursday", "Thu"],
+    ["Friday", "Fri"],
+    ["Saturday", "Sat"],
+    ["Sunday", "Sun"]
+  ];
 </script>
 
 <style>
@@ -144,6 +153,7 @@
       <br />
       <input bind:value={reportInEditMode.date} type="text" name="date" />
       <Datepicker
+        {daysOfWeek}
         bind:formattedSelected={reportInEditMode.date}
         format={date => dayjs(date).format('YYYY-MM-DD')}>
         <button on:click={skip}>📆</button>
