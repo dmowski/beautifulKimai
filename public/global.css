@@ -131,3 +131,19 @@ button:active {
   xborder-color: rgba(255, 99, 71, 0.08);
   background-color: rgba(255, 99, 71, 0.09);
 }
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}

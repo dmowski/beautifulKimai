@@ -83,7 +83,7 @@
 <style>
   .list {
     width: 50%;
-    padding: 0 0 10px 10px;
+    padding: 0 0 10px 30px;
     box-sizing: border-box;
   }
 
@@ -114,7 +114,7 @@
 </style>
 
 <div class="list">
-  <h2>Reports</h2>
+  <h3>Reports</h3>
   {#each daysBlock as dayBlock, i}
     <div class="day-block">
       <p class="day-title">
@@ -132,7 +132,7 @@
 </div>
 
 <div class="report-editor">
-  <h2>Editor</h2>
+  <h3>Editor</h3>
 
   {#if selectedReport !== null}
     <ReportEditor report={selectedReport} />
