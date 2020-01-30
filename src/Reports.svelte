@@ -3,7 +3,7 @@
   import PreviewReport from "./PreviewReport.svelte";
   import ReportEditor from "./ReportEditor.svelte";
   import converter from "./converters";
-
+  import dayjs from "dayjs";
   import { onMount } from "svelte";
   let daysBlock = [];
 
@@ -36,7 +36,9 @@
   }
   onMount(async () => {
     const todayDayObj = new Date();
-    const todayString = todayDayObj.toISOString().split("T")[0];
+
+    const todayString = dayjs(Date()).format("YYYY-MM-DD");
+
     reports.subscribe(reports => {
       if (!reports) {
         return;
